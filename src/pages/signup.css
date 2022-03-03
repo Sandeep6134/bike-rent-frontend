@@ -1,0 +1,12 @@
+.forms{
+    color:white;
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-rows: 1fr;
+    padding: 5em;
+}
+
+.bg{
+    height: 100vh;
+    background-image: linear-gradient(white,black);
+}
