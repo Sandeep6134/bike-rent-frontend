@@ -11,7 +11,8 @@ import "./card.css"
 
 export default function MediaCard(props) {
   return (
-    <Card className="card" sx={{ m:3 ,maxWidth: 300 }}>
+    <div className="col-sm-12 col-md-4 col-lg-3 m-1 ">
+    <Card className="card" style={{backgroundColor: "gray"}}>
       <CardMedia
         component="img"
         height="220"
@@ -19,7 +20,7 @@ export default function MediaCard(props) {
         alt="green iguana"
       />
       <CardContent>
-        <Typography sx={{mx:"auto", width: 200}} gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div">
           {props.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -31,5 +32,6 @@ export default function MediaCard(props) {
         <SimpleAccordion price={props.price}></SimpleAccordion>
       </CardActions>
     </Card>
+    </div>
   );
 }

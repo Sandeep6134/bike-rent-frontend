@@ -11,6 +11,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { TextField, Typography } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -23,6 +24,7 @@ export default function AlertDialogSlide(props) {
   const [hours, setHours] = React.useState(0)
   const [user, setUser] = React.useState('')
   const [password, setPassword] = React.useState('')
+  const navigate = useNavigate()
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,15 +33,23 @@ export default function AlertDialogSlide(props) {
   const handleClose = () => {
     setOpen(false);
   };
+  const fail = () =>{
+    alert("Invalid Credentials")
+  }
+  const succ = () => {
+    alert("Booking successful")
 
-  const submit = async () => {
-    console.log(value,hours)
+  }
+
+  const submit = async (e) => {
+    e.preventDefault()
     await axios.post('https://bike-rental-portal-backend.herokuapp.com/update/booking',{
             username: user,
             password: password,
             booking: value,
             bill: props.price*hours+200
-        }).then(this.setState(alert("Booking successful"))).catch(alert("User does not exist"))
+        }).then(succ).catch()
+        navigate("/")
   }
 
   return (

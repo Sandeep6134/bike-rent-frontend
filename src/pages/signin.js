@@ -1,9 +1,9 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import axios from "axios";
-import { Typography } from "@mui/material";
 import "./signup.css"
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 
 class SignIn extends React.Component{
@@ -16,26 +16,39 @@ class SignIn extends React.Component{
         }
     }
 
-    submit = async () =>{
-        console.log(this.state)
-        await axios.post('https://bike-rental-portal-backend.herokuapp.com/usersignin',{
+    exist = () => {
+        alert("Invalid Credentials")
+    }
+
+    success = () => {
+        alert("Login successfull")
+        
+    }
+
+    submit =  (event) =>{
+        event.preventDefault()
+         axios.post('https://bike-rental-portal-backend.herokuapp.com/usersignin',{
             username: this.state.userName,
             password: this.state.password,
-        }).then(this.setState(alert("Login successful"))).catch(this.setState({msg:"User does not exist"}))
+        }).then(this.success).catch(this.exist)
     }
 
     render(){
         return(
             <div>
-                <form onSubmit={(e)=>(this.submit())}>
-                <TextField type="text" name="userName" label="Enter User Name" onChange={(e)=> this.setState({userName:e.target.value})} required></TextField>
-                <TextField type="password" name="password" label="Enter your Password" onChange={(e)=> this.setState({password:e.target.value})} autoComplete="off" required></TextField>
-                <button className="btn btn-primary" size="medium" type="submit">Login</button>
+                <form className="bg" onSubmit={this.submit}>
+                <div className="container forms">
+                <TextField className="row col-sm-6" type="text" name="userName" margin="dense" label="Enter User Name" onChange={(e)=> this.setState({userName:e.target.value})} required></TextField>
+                <TextField className="row col-sm-6" type="password" name="password" margin="dense" label="Enter your Password" onChange={(e)=> this.setState({password:e.target.value})} autoComplete="off" required></TextField>
+                <Button variant="contained" color="success" className="btn btn-primary row col-sm-6 m-2" size="medium" margin="dense" type="submit">Login</Button>
                 <Link to="/signup">
-                <button className="btn btn-primary" type="button">Sign Up</button>
+                <Button variant="contained" color="success" className="btn btn-primary row col-sm-6 m-2"  type="button">Sign Up</Button>
                 </Link>
+                <Link to="/bikes">
+                    <Button variant="contained" color="success" className="btn btn-primary row col-sm-6 m-2" type="button">View Bikes</Button>   
+                </Link>
+                </div>
                 </form>
-                <Typography>{this.state.msg}</Typography>
             </div>
         )
     }

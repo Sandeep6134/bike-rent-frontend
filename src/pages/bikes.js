@@ -22,12 +22,17 @@ class Bikes extends React.Component{
         const {bikes} =this.state;
         console.log(bikes)
         return(
+            <div className="back">
             <div className="container">
+                <p className="text-center"> Choose A bike </p>
+                <div className="row">
                 {bikes.map((bike)=>(
-                    <div className="row col" key={bike.id} >
-                        <MediaCard className="col-sm" name={bike.name} price={bike.price} image={bike.image}></MediaCard>     
-                    </div>
+                   
+                        <MediaCard name={bike.name}  key={bike.id}  price={bike.price} image={bike.image}></MediaCard>     
+       
                 ))}
+            </div>
+            </div>
             </div>
         )
     }
